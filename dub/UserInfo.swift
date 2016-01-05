@@ -43,11 +43,13 @@ class UserInfo: NSObject {
     var uc_id : Int64 = 0
     var uid : Int64 = 0
     var sex : Int = 1
+
 }
 
 extension UserInfo : JsonToObject{
      class func toObject(json: JSON?) -> UserInfo? {
         let info = UserInfo()
+        info.auth_token = json?.dictionaryValue["auth_token"]?.string
         print("---",json)
         return info
     }

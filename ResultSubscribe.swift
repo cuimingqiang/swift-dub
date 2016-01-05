@@ -14,10 +14,11 @@ class ResultSubscribe<T>: ObserverType {
             case let .Error(e):
             print(e)
             case let .Next(data):
-
-            print(data)
+            let d = data as! Result<T>
+            print(".Next--",d.status)
             case .Completed:
             print("completed")
         }
     }
+
 }
