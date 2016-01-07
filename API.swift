@@ -12,25 +12,47 @@ import RxSwift
 import SwiftyJSON
 class API{
     static let server_url = "https://childapitest.qupeiyin.com"
-    class func login(phone phone:String,password:String)->Observable<Result<UserInfo>>{
-        print(phone,password)
+    class func login(phone phone:String,password:String)->Observable<UserInfo>{
+
         let url = NSURL(string: server_url+"/user/login")
         let request = NSMutableURLRequest(URL: url!)
         request.HTTPMethod = "POST"
         let body:String = String.init(format: "mobile=\(phone)&password=\(password)&devicetoken='333333'")
-        print(body)
         request.HTTPBody = body.dataUsingEncoding(NSUTF8StringEncoding)
-        print(request.description)
-        return NSURLSession.sharedSession().rx_data(request).map({ (data) -> Result<UserInfo> in
-            let result = Result<UserInfo>()
-            let json = JSON.init(data: data, options: NSJSONReadingOptions.AllowFragments, error: NSErrorPointer.init())
-            print(json)
-            result.status = (json.dictionaryValue["status"]?.int)!
-            result.msg = json.dictionaryValue["msg"]?.string
-            
-            result.data = UserInfo.toObject(json.dictionaryValue["data"])
-            print(result.status)
-            return result
+        return NSURLSession.sharedSession().rx_data(request)
+            .flatMap({ (data) -> Observable<UserInfo> in
+               return flatmap(data)
+            })
+//            .map({ (data) -> Result<UserInfo> in
+//            let result = Result<UserInfo>()
+//            let json = JSON.init(data: data, options: NSJSONReadingOptions.AllowFragments, error: NSErrorPointer.init())
+//            print(json)
+//            result.status = (json.dictionaryValue["status"]?.int)!
+//            result.msg = json.dictionaryValue["msg"]?.string
+//            
+//            result.data = UserInfo.toObject(json.dictionaryValue["data"])
+//            print(result.status)
+//            return result
+//        })
+    }
+
+    class func post(url:String,param:Dictionary<String,String>){
+        
+    }
+
+    class func flatmap<O: JsonToObject where O.E == O>(data:NSData)->Observable<O>{
+        let json = JSON.init(data: data, options: NSJSONReadingOptions.AllowFragments, error: NSErrorPointer.init())
+        let status = json.dictionaryValue["status"]?.int
+        let msg = json.dictionaryValue["msg"]?.string
+        return create({ (observer:AnyObserver<O>) -> Disposable in
+            if(status==1){
+                let o = O.toObject(json.dictionaryValue["data"])
+                observer.on(Event.Next(o!))
+                observer.onCompleted()
+            }else{
+                observer.onError(RequestError.init(msg: msg,status: status))
+            }
+            return AnonymousDisposable(){}
         })
     }
 }

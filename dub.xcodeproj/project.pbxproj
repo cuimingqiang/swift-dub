@@ -20,6 +20,7 @@
 		025D68CB1C30E9690064A83A /* ResultSubscribe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025D68CA1C30E9690064A83A /* ResultSubscribe.swift */; };
 		025D68CD1C31195C0064A83A /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025D68CC1C31195C0064A83A /* Result.swift */; };
 		025D68D11C3141860064A83A /* JsonToObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025D68D01C3141860064A83A /* JsonToObject.swift */; };
+		027DCE191C3E5E39001810C1 /* RequestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027DCE181C3E5E39001810C1 /* RequestError.swift */; };
 		02A1990C1C2A7F0100DA0EA5 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A1990B1C2A7F0100DA0EA5 /* API.swift */; };
 		02D19F741C2937E900C4FAAC /* AdController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D19F731C2937E900C4FAAC /* AdController.swift */; };
 		02D19F781C293EA300C4FAAC /* Schedulers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D19F771C293EA300C4FAAC /* Schedulers.swift */; };
@@ -49,6 +50,7 @@
 		025D68CA1C30E9690064A83A /* ResultSubscribe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultSubscribe.swift; sourceTree = "<group>"; };
 		025D68CC1C31195C0064A83A /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		025D68D01C3141860064A83A /* JsonToObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonToObject.swift; sourceTree = "<group>"; };
+		027DCE181C3E5E39001810C1 /* RequestError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestError.swift; sourceTree = "<group>"; };
 		02A1990B1C2A7F0100DA0EA5 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		02D19F6F1C292FCF00C4FAAC /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		02D19F731C2937E900C4FAAC /* AdController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdController.swift; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 				025D68CA1C30E9690064A83A /* ResultSubscribe.swift */,
 				025D68CC1C31195C0064A83A /* Result.swift */,
 				025D68D01C3141860064A83A /* JsonToObject.swift */,
+				027DCE181C3E5E39001810C1 /* RequestError.swift */,
 			);
 			name = datasource;
 			sourceTree = "<group>";
@@ -307,6 +310,7 @@
 				02A1990C1C2A7F0100DA0EA5 /* API.swift in Sources */,
 				021AB4481C24122300474C3C /* TobController.swift in Sources */,
 				021AB4581C26E60900474C3C /* SettingItemController.swift in Sources */,
+				027DCE191C3E5E39001810C1 /* RequestError.swift in Sources */,
 				02D19F741C2937E900C4FAAC /* AdController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
