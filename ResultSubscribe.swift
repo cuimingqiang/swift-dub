@@ -1,24 +1,9 @@
 //
-//  ResultSubscipt.swift
+//  ResultSubscriber.swift
 //  dub
 //
-//  Created by cuimingqiang on 15/12/28.
-//  Copyright © 2015年 cuimingqiang. All rights reserved.
+//  Created by cuimingqiang on 16/1/8.
+//  Copyright © 2016年 cuimingqiang. All rights reserved.
 //
 
 import Foundation
-import RxSwift
-class ResultSubscribe<T>: ObserverType {
-    func on(event: Event<T>) {
-        switch event{
-            case let .Error(e):
-            print(e)
-            case let .Next(data):
-            let d = data as! Result<T>
-            print(".Next--",d.status)
-            case .Completed:
-            print("completed")
-        }
-    }
-
-}
