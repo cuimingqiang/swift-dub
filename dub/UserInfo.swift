@@ -49,8 +49,22 @@ class UserInfo: NSObject {
 extension UserInfo : JsonToObject{
      class func toObject(json: JSON?) -> UserInfo? {
         let info = UserInfo()
-        info.auth_token = json?.dictionaryValue["auth_token"]?.string
-        print("---",json)
+        info.auth_token = json?.getString("auth_token")
+        info.avatar = json?.getString("avatar")
+        info.nickname = json?.getString("nickname")
+        info.sex = (json?.getInt("sex"))!
         return info
+    }
+
+}
+
+extension JSON{
+    func getString(key:String)->String?{
+       return dictionaryValue["\(key)"]?.string
+    }
+}
+extension JSON{
+    func getInt(key:String)->Int?{
+        return dictionaryValue["\(key)"]?.int
     }
 }

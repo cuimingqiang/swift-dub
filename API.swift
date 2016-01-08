@@ -45,7 +45,7 @@ class API{
         request.HTTPMethod = method.string
         var body = ""
         for key in param{
-            body += (key.0+"=\(key.1)&")
+            body += (key.0 + "=\(key.1)&")
         }
         if body.hasSuffix("&"){
             body = body.substringToIndex(body.endIndex.advancedBy(-1))
@@ -76,7 +76,7 @@ class API{
         let status = json.dictionaryValue["status"]?.int
         let msg = json.dictionaryValue["msg"]?.string
         return Observable.create({ (observer:AnyObserver<O>) -> Disposable in
-            if(status==1){
+            if(status == 1){
                 let d = json.dictionaryValue["data"]
                 observer.on(Event.Next(deal(d: d!)))
                 observer.onCompleted()
@@ -94,5 +94,7 @@ extension API{
         let param = ["mobile":phone,"password":password]
         return request(url:"/user/login",method:.POST, param: param)
     }
-
+    class func register()->Observable<Array<UserInfo>>{
+        return request(url: "", method: .POST, param: [:])
+    }
 }
