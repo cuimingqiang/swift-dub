@@ -36,11 +36,19 @@ class LoginController: UIViewController {
 //                    print(json.response)
 //                    print(json.result.value)
 //        }
-        let observer :ResultSubscribe<Result<UserInfo>> = ResultSubscribe()
+
                 API.login(phone: number!, password: pwd!)
                     .subscribeOn(Schedulers.IO())
                     .observeOn(Schedulers.MainScheduler())
-                    .subscribe(observer).addDisposableTo(bag)
+                    .subscribe(onNext: { (data) -> Void in
+                            print(data)
+                        }, onError: { (e) -> Void in
+                            print(e)
+                        }, onCompleted: { () -> Void in
+
+                        }) { () -> Void in
+
+        }
 //                    .subscribe(onNext: { (result) -> Void in
 //                            let json = JSON.init(data: result, options: NSJSONReadingOptions.AllowFragments, error: NSErrorPointer.init())
 //                            let data = json.dictionaryValue["data"]

@@ -32,6 +32,6 @@ class Schedulers {
             operationQueue.qualityOfService = NSQualityOfService.UserInitiated
         #endif
         backgroundWorkScheduler = OperationQueueScheduler(operationQueue: operationQueue)
-        mainScheduler = MainScheduler.sharedInstance
+        mainScheduler = MainScheduler.instance
     }
 }

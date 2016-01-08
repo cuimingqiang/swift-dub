@@ -10,44 +10,75 @@ import Foundation
 import RxCocoa
 import RxSwift
 import SwiftyJSON
+
+enum HTTPMethod{
+    case POST
+    case GET
+}
+extension HTTPMethod{
+    internal var string :String{
+        switch(self){
+        case .POST:
+            return "POST"
+        case .GET:
+            return "GET"
+        }
+    }
+}
 class API{
     static let server_url = "https://childapitest.qupeiyin.com"
-    class func login(phone phone:String,password:String)->Observable<UserInfo>{
 
-        let url = NSURL(string: server_url+"/user/login")
+    class func request<O:JsonToObject where O.E == O>(url path:String,method:HTTPMethod,param:Dictionary<String,String>)->Observable<Array<O>>{
+        return request(url: path, method: method, param: param).flatMap({ (data) -> Observable<Array<O>> in
+            return flatmap(data)
+        })
+
+    }
+    class func request<O: JsonToObject where O.E == O>(url path:String,method:HTTPMethod,param:Dictionary<String,String>)->Observable<O>{
+        return request(url: path, method: method, param: param).flatMap({ (data) -> Observable<O> in
+            return flatmap(data)
+        })
+    }
+    class func request(url path:String,method:HTTPMethod,param:Dictionary<String,String>) -> Observable<NSData> {
+        let url = NSURL(string: server_url+path)
         let request = NSMutableURLRequest(URL: url!)
-        request.HTTPMethod = "POST"
-        let body:String = String.init(format: "mobile=\(phone)&password=\(password)&devicetoken='333333'")
+        request.HTTPMethod = method.string
+        var body = ""
+        for key in param{
+            body += (key.0+"=\(key.1)&")
+        }
+        if body.hasSuffix("&"){
+            body = body.substringToIndex(body.endIndex.advancedBy(-1))
+        }
+        print(body)
         request.HTTPBody = body.dataUsingEncoding(NSUTF8StringEncoding)
         return NSURLSession.sharedSession().rx_data(request)
-            .flatMap({ (data) -> Observable<UserInfo> in
-               return flatmap(data)
-            })
-//            .map({ (data) -> Result<UserInfo> in
-//            let result = Result<UserInfo>()
-//            let json = JSON.init(data: data, options: NSJSONReadingOptions.AllowFragments, error: NSErrorPointer.init())
-//            print(json)
-//            result.status = (json.dictionaryValue["status"]?.int)!
-//            result.msg = json.dictionaryValue["msg"]?.string
-//            
-//            result.data = UserInfo.toObject(json.dictionaryValue["data"])
-//            print(result.status)
-//            return result
-//        })
     }
 
-    class func post(url:String,param:Dictionary<String,String>){
-        
+    class func flatmap<O:JsonToObject where O.E == O>(data:NSData)->Observable<Array<O>>{
+        return flatmap(data, deal: { (d) -> Array<O> in
+            var res:Array<O> = []
+            for o in d{
+                res.append(O.toObject(o.1)!)
+            }
+            return res
+        })
     }
 
     class func flatmap<O: JsonToObject where O.E == O>(data:NSData)->Observable<O>{
+        return flatmap(data, deal: { (d) -> O in
+            O.toObject(d)!
+        })
+    }
+
+    class func flatmap<O>(data:NSData,deal:(d:JSON)->O)->Observable<O>{
         let json = JSON.init(data: data, options: NSJSONReadingOptions.AllowFragments, error: NSErrorPointer.init())
         let status = json.dictionaryValue["status"]?.int
         let msg = json.dictionaryValue["msg"]?.string
-        return create({ (observer:AnyObserver<O>) -> Disposable in
+        return Observable.create({ (observer:AnyObserver<O>) -> Disposable in
             if(status==1){
-                let o = O.toObject(json.dictionaryValue["data"])
-                observer.on(Event.Next(o!))
+                let d = json.dictionaryValue["data"]
+                observer.on(Event.Next(deal(d: d!)))
                 observer.onCompleted()
             }else{
                 observer.onError(RequestError.init(msg: msg,status: status))
@@ -55,32 +86,13 @@ class API{
             return AnonymousDisposable(){}
         })
     }
+
 }
 
-extension RxCocoaURLError{
-    public var code : Int{
-        switch self{
-        case .Unknown:
-            return -1
-        case .NonHTTPResponse(_):
-            return -3
-        case let .HTTPRequestFailed(response,_):
-            return response.statusCode
-        case .DeserializationError(_):
-            return -2
-        }
+extension API{
+    class func login(phone phone:String,password:String)->Observable<UserInfo>{
+        let param = ["mobile":phone,"password":password]
+        return request(url:"/user/login",method:.POST, param: param)
     }
-    public var message :String{
-        switch self{
-        case .Unknown:
-            return "未知错误"
-        case .NonHTTPResponse(_):
-            return "非法响应"
-        case let .HTTPRequestFailed(response,_):
-            print(response)
-            return response.URL.debugDescription
-        case .DeserializationError(_):
-            return "解析错误"
-        }
-    }
+
 }
