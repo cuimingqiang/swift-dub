@@ -18,7 +18,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         RxBus.obtainEvent()
-            .multicast()
+            .subscribeNext { (o:UserInfo) -> Void in
+                print("0000",o.auth_token)
+        }
         
         return true
     }

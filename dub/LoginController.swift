@@ -40,6 +40,7 @@ class LoginController: UIViewController {
                             print("Completed")
                         case let .Next(data):
                             RxBus.post(data)
+                            RxBus.post(1)
                             print(data.auth_token)
                             self.gotoMain()
                             return

@@ -12,16 +12,10 @@ class RxBus {
     private static var subject = PublishSubject<Any>.init()
     
 
-    internal class func obtainEvent()->Observable<Any>{
+    internal class func obtainEvent<E>()->Observable<E>{
         return subject.asObserver()
-//            .flatMap({ (data:Any) -> Observable<O> in
-//            return Observable.create({ (observer:AnyObserver<O>) -> Disposable in
-//                if data is O.Type{
-//                    observer.onNext(data as! O)
-//                }
-//                return NopDisposable.instance
-//            })
-//        })
+            .filter({ $0 is E})
+            .map({ $0 as! E })
     }
     internal class func post(event:AnyObject){
         subject.onNext(event)
