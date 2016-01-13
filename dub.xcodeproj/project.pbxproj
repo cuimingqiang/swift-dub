@@ -18,7 +18,6 @@
 		021AB4561C26CCC600474C3C /* SettingItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 021AB4551C26CCC600474C3C /* SettingItemView.xib */; };
 		021AB4581C26E60900474C3C /* SettingItemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021AB4571C26E60900474C3C /* SettingItemController.swift */; };
 		025D68CB1C30E9690064A83A /* ResultSubscribe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025D68CA1C30E9690064A83A /* ResultSubscribe.swift */; };
-		025D68CD1C31195C0064A83A /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025D68CC1C31195C0064A83A /* Result.swift */; };
 		025D68D11C3141860064A83A /* JsonToObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025D68D01C3141860064A83A /* JsonToObject.swift */; };
 		027DCE191C3E5E39001810C1 /* RequestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027DCE181C3E5E39001810C1 /* RequestError.swift */; };
 		02A1990C1C2A7F0100DA0EA5 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A1990B1C2A7F0100DA0EA5 /* API.swift */; };
@@ -29,6 +28,7 @@
 		02F760871C2BA3EA008DADA9 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D19F6F1C292FCF00C4FAAC /* LoginController.swift */; };
 		02FA456F1C2C26E200356200 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0209462D1C1199970058C661 /* MainController.swift */; };
 		02FA45701C2C2CBD00356200 /* MineController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021AB4491C24124600474C3C /* MineController.swift */; };
+		841BF7A41C3FD4E10087136F /* RxBus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841BF7A31C3FD4E10087136F /* RxBus.swift */; };
 		95004163344CCDCCEB6A0617 /* Pods_dub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50C453C00497DF1A14981C09 /* Pods_dub.framework */; };
 /* End PBXBuildFile section */
 
@@ -48,7 +48,6 @@
 		021AB4551C26CCC600474C3C /* SettingItemView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingItemView.xib; sourceTree = "<group>"; };
 		021AB4571C26E60900474C3C /* SettingItemController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingItemController.swift; sourceTree = "<group>"; };
 		025D68CA1C30E9690064A83A /* ResultSubscribe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultSubscribe.swift; sourceTree = "<group>"; };
-		025D68CC1C31195C0064A83A /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		025D68D01C3141860064A83A /* JsonToObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonToObject.swift; sourceTree = "<group>"; };
 		027DCE181C3E5E39001810C1 /* RequestError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestError.swift; sourceTree = "<group>"; };
 		02A1990B1C2A7F0100DA0EA5 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
@@ -58,6 +57,7 @@
 		02F760831C2A9DDE008DADA9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		02F760851C2A9DFF008DADA9 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		50C453C00497DF1A14981C09 /* Pods_dub.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_dub.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		841BF7A31C3FD4E10087136F /* RxBus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxBus.swift; sourceTree = "<group>"; };
 		912B9FCDCE39432EF24DB392 /* Pods-dub.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dub.release.xcconfig"; path = "Pods/Target Support Files/Pods-dub/Pods-dub.release.xcconfig"; sourceTree = "<group>"; };
 		FDE88F7F48A405C84D361FE1 /* Pods-dub.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dub.debug.xcconfig"; path = "Pods/Target Support Files/Pods-dub/Pods-dub.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -77,6 +77,7 @@
 		0209461F1C1199970058C661 = {
 			isa = PBXGroup;
 			children = (
+				841BF7A21C3FD4CE0087136F /* rxbus */,
 				02A1990A1C2A7EE000DA0EA5 /* datasource */,
 				0209462A1C1199970058C661 /* dub */,
 				020946291C1199970058C661 /* Products */,
@@ -138,7 +139,6 @@
 				02D19F771C293EA300C4FAAC /* Schedulers.swift */,
 				02A1990B1C2A7F0100DA0EA5 /* API.swift */,
 				025D68CA1C30E9690064A83A /* ResultSubscribe.swift */,
-				025D68CC1C31195C0064A83A /* Result.swift */,
 				025D68D01C3141860064A83A /* JsonToObject.swift */,
 				027DCE181C3E5E39001810C1 /* RequestError.swift */,
 			);
@@ -160,6 +160,14 @@
 				50C453C00497DF1A14981C09 /* Pods_dub.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		841BF7A21C3FD4CE0087136F /* rxbus */ = {
+			isa = PBXGroup;
+			children = (
+				841BF7A31C3FD4E10087136F /* RxBus.swift */,
+			);
+			name = rxbus;
 			sourceTree = "<group>";
 		};
 		CB12D75C2E05D6BCF8F6E78F /* Pods */ = {
@@ -297,12 +305,12 @@
 			files = (
 				02FA45701C2C2CBD00356200 /* MineController.swift in Sources */,
 				025D68D11C3141860064A83A /* JsonToObject.swift in Sources */,
+				841BF7A41C3FD4E10087136F /* RxBus.swift in Sources */,
 				02FA456F1C2C26E200356200 /* MainController.swift in Sources */,
 				02F760871C2BA3EA008DADA9 /* LoginController.swift in Sources */,
 				02D19F781C293EA300C4FAAC /* Schedulers.swift in Sources */,
 				021AB4461C2411CB00474C3C /* TeacherController.swift in Sources */,
 				025D68CB1C30E9690064A83A /* ResultSubscribe.swift in Sources */,
-				025D68CD1C31195C0064A83A /* Result.swift in Sources */,
 				021AB4441C2410EA00474C3C /* DubController.swift in Sources */,
 				0209462C1C1199970058C661 /* AppDelegate.swift in Sources */,
 				02127BD41C283A1F0076F743 /* OnLogoffViewController.swift in Sources */,

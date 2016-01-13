@@ -39,7 +39,10 @@ class LoginController: UIViewController {
                         case .Completed:
                             print("Completed")
                         case let .Next(data):
+                            RxBus.post(data)
                             print(data.auth_token)
+                            self.gotoMain()
+                            return
                         }
                     }.addDisposableTo(bag)
 

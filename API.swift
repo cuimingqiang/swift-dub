@@ -73,6 +73,7 @@ class API{
 
     class func flatmap<O>(data:NSData,deal:(d:JSON)->O)->Observable<O>{
         let json = JSON.init(data: data, options: NSJSONReadingOptions.AllowFragments, error: NSErrorPointer.init())
+        print("-->HTTP Result:",json)
         let status = json.dictionaryValue["status"]?.int
         let msg = json.dictionaryValue["msg"]?.string
         return Observable.create({ (observer:AnyObserver<O>) -> Disposable in

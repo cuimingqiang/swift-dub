@@ -40,9 +40,9 @@ class UserInfo: NSObject {
     var auth_token : String?
     var avatar : String?
     var nickname : String?
-    var uc_id : Int64 = 0
-    var uid : Int64 = 0
-    var sex : Int = 1
+    var uc_id : String?
+    var uid : String?
+    var sex : String?
 
 }
 
@@ -52,7 +52,8 @@ extension UserInfo : JsonToObject{
         info.auth_token = json?.getString("auth_token")
         info.avatar = json?.getString("avatar")
         info.nickname = json?.getString("nickname")
-        info.sex = (json?.getInt("sex"))!
+        info.sex = json?.getString("sex")
+        
         return info
     }
 

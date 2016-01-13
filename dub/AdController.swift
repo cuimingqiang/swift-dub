@@ -12,14 +12,11 @@ import RxSwift
 class AdController : UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("AdController")
-
     }
     override func viewDidAppear(animated: Bool) {
         gotoLogin()
     }
     func gotoMain(){
-        print("======")
         let main = self.storyboard?.instantiateViewControllerWithIdentifier("MainController") as! MainController
         self.presentViewController(main, animated: true, completion: nil)
     }
